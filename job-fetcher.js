@@ -5,7 +5,10 @@ dotenv.config();
 
 async function getJobs() {
   const query = "MERN stack developer remote OR India site:linkedin.com/jobs";
-  const url = \`https://www.googleapis.com/customsearch/v1?q=\${encodeURIComponent(query)}&key=\${process.env.GOOGLE_API_KEY}&cx=\${process.env.SEARCH_ENGINE_ID}\`;
+  const url = "https://www.googleapis.com/customsearch/v1?q=" + encodeURIComponent(query) + 
+            "&key=" + process.env.GOOGLE_API_KEY + 
+            "&cx=" + process.env.SEARCH_ENGINE_ID;
+
 
   const res = await fetch(url);
   const data = await res.json();
