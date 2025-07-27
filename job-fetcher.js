@@ -5,10 +5,11 @@ dotenv.config();
 
 async function getJobs() {
   const query = "MERN stack developer remote OR India site:linkedin.com/jobs";
-  const url = "https://www.googleapis.com/customsearch/v1?q=" + encodeURIComponent(query) + 
-            "&key=" + process.env.GOOGLE_API_KEY + 
-            "&cx=" + process.env.SEARCH_ENGINE_ID;
-
+  const url =
+    "https://www.googleapis.com/customsearch/v1?q=" +
+    encodeURIComponent(query) +
+    "&key=" + process.env.GOOGLE_API_KEY +
+    "&cx=" + process.env.SEARCH_ENGINE_ID;
 
   const res = await fetch(url);
   const data = await res.json();
@@ -16,7 +17,7 @@ async function getJobs() {
   if (!data.items) return [];
 
   return data.items.map((item, index) => {
-    return \`\${index + 1}. \${item.title}\n\${item.link}\n\`;
+    return `${index + 1}. ${item.title}\n${item.link}\n`;  // ✅ Correct usage of template literals
   });
 }
 
@@ -30,9 +31,9 @@ async function sendEmail(jobs) {
   });
 
   const mailOptions = {
-    from: \`"MERN Job Bot" <\${process.env.GMAIL_USER}>\`,
+    from: `"MERN Job Bot" <${process.env.GMAIL_USER}>`,  // ✅ Correct usage of template literals
     to: process.env.TO_EMAIL,
-    subject: \`🔥 MERN Stack Jobs – \${new Date().toLocaleDateString()}\`,
+    subject: `🔥 MERN Stack Jobs – ${new Date().toLocaleDateString()}`,  // ✅ Correct usage
     text: jobs.length ? jobs.join("\n\n") : "No jobs found today.",
   };
 
